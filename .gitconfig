@@ -1,0 +1,52 @@
+[user]
+	name = Manish Harpalani
+	email = manishharpalani+github@gmail.com
+
+[branch]
+   # Always set up pull to rebase instead of merge.
+   # While true will enable it for remote, always enables it for local branches as well.
+	autosetuprebase = always
+ 
+[push] 
+   # We want to push only the current branch to its upstream and not push all tracking branches.
+   default = tracking
+ 
+[pull] 
+   # Always preserve merge commits on a git pull. With this, git pull will always do “git pull --rebase --preserve-merges”
+	rebase = true
+ 
+[http]
+   sslverify = false
+ 
+[alias]
+	st = status
+	up = pull origin
+	di = diff
+	co = checkout
+	ci = commit
+	br = branch
+	mvbr = branch -m
+	log3 = log -3 HEAD
+	logname = log --name-only
+	logstat = log --stat
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lc = log ORIG_HEAD.. --stat --no-merges
+	diffstat=diff --stat -r
+	whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+	coundo = reset HEAD^
+	rebase5i = rebase -i HEAD~5
+	rebasem = rebase master
+	rebasemi = rebase -i master
+	pushtopic = push -u origin
+	stashdiff = stash show -p
+	fixup = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+	fixup1 = !sh -c 'git commit -m \"fixup! $(git log -1 --format='\\''%s'\\'' $1)\" $2' -
+	squash = !sh -c 'git commit -m \"squash! $(git log -1 --format='\\''%s'\\'' $@)\"' -
+
+[diff "gunzip"]
+	textconv = gunzip -c
+[core]
+	excludesfile = ~/.gitignore_global
+[grep]
+	extendRegexp = true
+	lineNumber = true
