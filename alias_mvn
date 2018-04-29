@@ -1,0 +1,8 @@
+alias mvn_jar="mvn -U clean package spring-boot:repackage -DskipTests -Dcheckstyle.skip=true"
+alias mvn_sonar="mvn clean verify sonar:sonar -DskipTest"
+alias mvn_bld="mvn clean verify -DskipTests"
+alias mvn_install="mvn -U clean install -DskipTests"
+
+alias mvn_jetty="mvn -Pdeveloper -DskipTests jetty:run"
+
+alias a_mvn_pkg='mvn -U clean package spring-boot:repackage -DskipTests -Dcheckstyle.skip=true'

@@ -1,0 +1,93 @@
+alias echo_calc='echo "calc=expr"; expr'
+    #http://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks
+alias echo_vi_sub='echo :%s/search_string/replacement_string/g'
+
+alias a_scrls='screen -ls'
+function a_scrQuit {
+    screen -X -S "$1" quit
+}
+
+alias a_findlocal='sudo find / -fstype local -name'
+
+function a_llfind() {
+ls -lah $( find "$1" -name "$2" )
+}
+
+function a_replaceAll() {
+find . -name "$1" -type f -print0 | xargs -0 sed -i 's/"$2"/$3"/g'
+}
+
+function a_sedDir {
+for i in "$1"; do
+    sed -i 's/"$2"/"$3"/g' $i
+done
+}
+
+function a_nose() {
+nosetests -m "$2" -s -v "$1"
+}
+
+function a_nose1() {
+nosetests -m ^"$2"$ -s -v "$1"
+}
+
+function a_swap()  { local TMPFILE=tmp.$$; sudo mv "$1" $TMPFILE; sudo mv "$2" "$1"; sudo mv $TMPFILE "$2"; }
+
+function a_cp-p() { cp --parents "$1" "$2"; }
+# --parents
+#       Form the name of each destination file by appending to the target
+#       directory a slash and the specified name of the source file.  The
+#       last argument given tocp' must be the name of an existing directory. For example, the command:
+# usage: cp-p --parents a/b/c existing_dir
+# copies the file `a/b/c' to `existing_dir/a/b/c', creating any missing intermediate directories.
+
+function a_cd()
+{
+  y=\$"$1"   # Name of variable (not value!).
+  x=`eval "expr \"$y\" "`
+  cd $x
+}
+
+function a_findps()
+{
+  ps waux | grep -i -E "$1" | grep -v grep
+}
+
+function a_pg_init()
+{
+  export ST_PGPORT="$1"
+  rm -rf o/dbdir
+  ../annotations/annoadmin.sh -P "$1" --setup -D o/dbdir/ -u uiserver -p uiserver -N uitest -p any --dbportfile=o/db.port -s silvertail
+}
+function a_psql_uitest()
+{
+  psql -h localhost -p "$1" uitest uiserver
+}
+
+function a_pyServer()
+{
+  source /opt/rh/python34/enable
+  python -m http.server 80 &
+}
+
+alias a_stop_mongo='brew services stop mongodb26'
+alias a_py2='source ~/.virtualenvs/python2/bin/activate'
+alias a_py3='source ~/.virtualenvs/python3/bin/activate'
+
+alias a_lsdir='ls -d */'
+alias a_cda=acd
+alias a_cleano="find o/ -type f -not -name 'test'  | xargs rm"
+
+alias a_yumclean="sudo yum clean all; sudo yum makecache"
+
+alias a_sudoers='sudo visudo'
+alias a_sudonopass='sudo visudo'
+alias a_untargz='tar -zxvf'
+alias a_untar='tar -xvf'
+    # https://help.ubuntu.com/community/Sudoers
+alias a_mountsts='sudo mount -t nfs rsarebdfs1.rsa.lab.emc.com:/silvertail_nfs /sts/eng'
+
+alias a_reexec='fc -s'
+    # A useful alias to use with this is r='fc -s', so that typing `r cc'
+    # runs the last command beginning with `cc' and typing `r' re-executes
+    # the last command.

@@ -1,0 +1,7 @@
+function a_bldredir() {
+    bld $1 > bld_$1.log 2>&1
+}
+
+function a_cmdredir() {
+    $1 > $1.log 2>&1
+}

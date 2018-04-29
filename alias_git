@@ -1,0 +1,118 @@
+# git aliases (start with 'g')
+alias g_='git'
+
+# clone
+alias g_cl='git clone'
+
+# git clean
+alias g_clean='sudo git clean -fxd' # will delete everything not managed by git. <cringe>
+alias g_cleandr='sudo git clean -nxd' # will show what to be deleted
+
+# branch
+function g_br() { git branch --color -v "$@" ;}
+function g_brup() { git branch  --set-upstream "$1" origin/"$1";}
+alias g_mvbr='git branch -m'
+
+# status
+alias g_st='git status --short'
+alias g_stnou='git status --short -uno'
+alias g_stall='git status --short -u'
+alias g_stuno='git status -uno'
+
+alias g_stat=g_st
+alias g_statnou=g_stnou
+alias g_statall=g_stall
+
+# stash
+function g_shsh() { git stash show "$@" ;}
+function g_shdf() { git stash show -p --color "$@" ;}
+alias g_shls='git stash list'
+alias g_shdr='git stash drop'
+alias g_shcl='git stash clear'
+
+alias g_shpush='git stash save'
+alias g_shpop='git stash pop'
+alias g_shi='git stash save --patch'
+
+# diff
+alias g_df='git diff --color'
+alias g_dfm='g_df master --color'
+function g_dfhead-N() { g_df HEAD~"$@";}
+alias g_dfstat='g_df --stat'
+alias g_dfc='git diff --cached --color'
+alias g_dfw='git diff --color -w'
+alias g_dc='git diff --stat --color --cached'
+
+# log, show
+alias g_lg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+function g_lghead-N() { glg HEAD~"$@";}
+alias g_lgst="g_lg --stat"
+alias g_lgname="g_lg --name-only"
+alias g_sh="git show --color"
+alias g_lgstat3='git log --stat -3 HEAD'
+alias g_lc='git log ORIG_HEAD.. --stat --no-merges'
+alias g_l='git log --pretty=format:"%Cgreen%h %Creset %s %Cblueby %an (%ar) %Cred %d" --graph'
+function g_lg-N() {
+    git log --reverse --max-count="$@" --name-only --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+}
+
+#push
+alias g_push='git push'
+function g_pbr() { git push -u origin "$@":"$@" ;}
+function g_rmbr() { git push origin :"$@" ;}
+alias g_rmloc='git branch -D'
+
+# pull
+alias g_pull='git pull'
+alias g_puo='git pull origin'
+alias g_pum='git checkout master; git pull'
+alias g_pu_asoc='git pull --rebase asoc master'
+
+#check out
+alias g_ckom='git checkout master'
+function g_co() { git checkout "$@" ;}
+function g_cko() { git checkout "$@" ;}
+function g_mkbr() { git checkout -b "$@" ;}
+
+# commit
+alias g_cm='git commit'
+alias g_commit='git commit'
+alias g_ma='git commit -am'
+function g_amend() { git commit --amend "$@" ;}
+
+# reset
+alias g_rs='git reset'
+alias g_unstage='git reset HEAD'
+function g_rsback() { g_rs HEAD~"$@";}
+
+alias g_cp="git cherry-pick"
+alias g_cpn="git cherry-pick -n"
+
+# rebase
+function g_rb() { git rebase "$@";}
+function g_rbi() { git rebase -i "$@";}
+function g_rbhbk() { git rebase  -i --autosquash HEAD~"$@";}
+alias g_rb_asoc='git pull --rebase asoc master'
+alias g_rbm='git rebase asoc/master'
+alias g_rbsk='git rebase --skip'
+alias g_rbcont='git rebase --continue'
+alias g_rbabort='git rebase --abort'
+alias g_rbsq="git rebase -i --autosquash"
+#alias g_rbmsq="git rebase -i --autosquash asoc/master"
+
+alias g_fix="git fixup"
+
+# add, rm
+alias g_add='git add'
+alias g_addm='git add -u'
+alias g_rm='git rm'
+
+# remote
+alias g_ra='git remote add'
+alias g_rr='git remote rm'
+alias g_ru='git remote update'
+
+alias g_ver='git describe  --tags --match version*'
+
+
+
